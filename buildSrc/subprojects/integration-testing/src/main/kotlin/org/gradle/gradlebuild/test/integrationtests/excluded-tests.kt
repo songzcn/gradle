@@ -98,8 +98,5 @@ val excludedTests = listOf(
     "IvyPublishS3IntegrationTest" to listOf(VERSION_1_9, VERSION_1_10),
     "IvyS3UploadArchivesIntegrationTest" to listOf(VERSION_1_9, VERSION_1_10),
     "MavenPublishS3IntegrationTest" to listOf(VERSION_1_9, VERSION_1_10),
-    "MavenPublishS3ErrorsIntegrationTest" to listOf(VERSION_1_9, VERSION_1_10),
-
-    // Various problems, eg scala compile
-    "UserGuideSamplesIntegrationTest" to listOf(VERSION_1_9, VERSION_1_10)
+    "MavenPublishS3ErrorsIntegrationTest" to listOf(VERSION_1_9, VERSION_1_10)
 )
