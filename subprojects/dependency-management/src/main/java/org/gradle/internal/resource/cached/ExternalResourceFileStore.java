@@ -17,9 +17,9 @@ package org.gradle.internal.resource.cached;
 
 import org.apache.commons.lang.StringUtils;
 import org.gradle.api.Transformer;
+import org.gradle.api.internal.artifacts.ivyservice.CacheLockingManager;
 import org.gradle.api.internal.file.TemporaryFileProvider;
 import org.gradle.internal.resource.local.GroupedAndNamedUniqueFileStore;
-import org.gradle.internal.resource.local.UniquePathKeyFileStore;
 
 import java.io.File;
 
@@ -39,7 +39,7 @@ public class ExternalResourceFileStore extends GroupedAndNamedUniqueFileStore<St
         }
     };
 
-    public ExternalResourceFileStore(File baseDir, TemporaryFileProvider tmpProvider) {
-        super(new UniquePathKeyFileStore(baseDir), tmpProvider, GROUPER, NAMER);
+    public ExternalResourceFileStore(File baseDir, TemporaryFileProvider tmpProvider, CacheLockingManager cacheLockingManager) {
+        super(baseDir, tmpProvider, cacheLockingManager, GROUPER, NAMER);
     }
 }

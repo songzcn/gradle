@@ -17,10 +17,10 @@
 package org.gradle.api.internal.filestore.ivy;
 
 import org.gradle.api.Transformer;
+import org.gradle.api.internal.artifacts.ivyservice.CacheLockingManager;
 import org.gradle.api.internal.file.TemporaryFileProvider;
 import org.gradle.internal.component.external.model.ModuleComponentArtifactIdentifier;
 import org.gradle.internal.resource.local.GroupedAndNamedUniqueFileStore;
-import org.gradle.internal.resource.local.UniquePathKeyFileStore;
 
 import java.io.File;
 
@@ -38,7 +38,7 @@ public class ArtifactIdentifierFileStore extends GroupedAndNamedUniqueFileStore<
         }
     };
 
-    public ArtifactIdentifierFileStore(File fileStoreDir, TemporaryFileProvider temporaryFileProvider) {
-        super(new UniquePathKeyFileStore(fileStoreDir), temporaryFileProvider, GROUP, NAME);
+    public ArtifactIdentifierFileStore(File baseDir, TemporaryFileProvider temporaryFileProvider, CacheLockingManager cacheLockingManager) {
+        super(baseDir, temporaryFileProvider, cacheLockingManager, GROUP, NAME);
     }
 }

@@ -14,27 +14,35 @@
  * limitations under the License.
  */
 
-package org.gradle.cache.internal;
+package org.gradle.internal.resource.local;
 
 import org.gradle.cache.CleanableStore;
 
 import java.io.File;
-import java.io.FileFilter;
+import java.util.Collection;
 
-public class NonReservedCacheFileFilter implements FileFilter {
+public class CleanableSubDir implements CleanableStore {
 
-    private final CleanableStore cleanableStore;
+    private final CleanableStore delegate;
+    private final File subDir;
 
-    public NonReservedCacheFileFilter(CleanableStore cleanableStore) {
-        this.cleanableStore = cleanableStore;
+    public CleanableSubDir(CleanableStore delegate, File subDir) {
+        this.delegate = delegate;
+        this.subDir = subDir;
     }
 
     @Override
-    public boolean accept(File file) {
-        return !isReserved(file);
+    public String getDisplayName() {
+        return delegate.getDisplayName();
     }
 
-    private boolean isReserved(File file) {
-        return cleanableStore.getReservedCacheFiles().contains(file);
+    @Override
+    public File getBaseDir() {
+        return subDir;
+    }
+
+    @Override
+    public Collection<File> getReservedCacheFiles() {
+        return delegate.getReservedCacheFiles();
     }
 }
