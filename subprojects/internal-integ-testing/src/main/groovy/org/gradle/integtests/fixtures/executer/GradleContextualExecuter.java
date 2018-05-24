@@ -93,6 +93,7 @@ public class GradleContextualExecuter extends AbstractDelegatingGradleExecuter {
             gradleExecuter.assertCanExecute();
         } catch (AssertionError assertionError) {
             gradleExecuter = new NoDaemonGradleExecuter(getDistribution(), getTestDirectoryProvider());
+            gradleExecuter.assertCanExecute();
             configureExecuter(gradleExecuter);
         }
 
