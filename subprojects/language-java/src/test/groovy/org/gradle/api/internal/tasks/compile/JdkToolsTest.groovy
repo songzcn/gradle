@@ -62,6 +62,10 @@ class JdkToolsTest extends Specification {
         println(System.getProperty("java.class.path"))
         println(ClasspathUtil.getClasspathForClass(compiler.class))
         println(compiler.class.classLoader)
+        println(compiler.class.classLoader.ucp.path)
+        System.properties.each {
+            println("${it.key}=${it.value}")
+        }
 
         then:
         thrown IllegalStateException
