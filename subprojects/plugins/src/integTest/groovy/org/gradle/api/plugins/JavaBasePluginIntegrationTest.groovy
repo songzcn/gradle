@@ -47,4 +47,25 @@ class JavaBasePluginIntegrationTest extends AbstractIntegrationSpec {
         file("main/build/classes/java/main").assertHasDescendants("Main.class")
         file("tests/build/classes/java/unitTest").assertHasDescendants("Test.class")
     }
+
+    def "can configure source and target Java versions"() {
+        buildFile << """
+            apply plugin: 'java-base'
+            java {
+                sourceCompatibility = JavaVersion.VERSION_1_7
+                targetCompatibility = JavaVersion.VERSION_1_8
+            }
+            sourceSets { 
+                unitTest { } 
+            }
+            compileUnitTestJava.doFirst {
+                assert sourceCompatibility == "1.7"
+                assert targetCompatibility == "1.8"
+            }
+        """
+        file("src/unitTest/java/Test.java") << """public class Test { }"""
+
+        expect:
+        succeeds("unitTestClasses")
+    }
 }
