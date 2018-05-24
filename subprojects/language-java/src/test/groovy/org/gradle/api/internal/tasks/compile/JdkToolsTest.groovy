@@ -16,9 +16,11 @@
 
 package org.gradle.api.internal.tasks.compile
 
+import org.gradle.integtests.fixtures.executer.GradleContextualExecuter
 import org.gradle.internal.classloader.ClasspathUtil
 import org.gradle.internal.jvm.JavaInfo
 import org.gradle.util.Requires
+import spock.lang.IgnoreIf
 import spock.lang.Issue
 import spock.lang.Specification
 
@@ -51,7 +53,7 @@ class JdkToolsTest extends Specification {
     }
 
     @Issue("gradle/core-issues#115")
-    @Requires(FIX_TO_WORK_ON_JAVA9)
+    @IgnoreIf({ GradleContextualExecuter.embedded })
     def "throws when tools doesn't contain compiler"() {
         when:
         def compiler = new JdkTools(Mock(JavaInfo) {
