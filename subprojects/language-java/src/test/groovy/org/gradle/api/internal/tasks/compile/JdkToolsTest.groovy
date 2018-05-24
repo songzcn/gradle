@@ -62,7 +62,7 @@ class JdkToolsTest extends Specification {
         println(System.getProperty("java.class.path"))
         println(ClasspathUtil.getClasspathForClass(compiler.class))
         println(compiler.class.classLoader)
-        println(compiler.class.classLoader.ucp.path)
+        println(compiler.class.classLoader.getURLs() as List)
         System.properties.each {
             println("${it.key}=${it.value}")
         }

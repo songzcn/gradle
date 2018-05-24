@@ -16,6 +16,7 @@
 
 package org.gradle.initialization;
 
+import org.gradle.api.logging.Logging;
 import org.gradle.internal.classloader.ClassLoaderFactory;
 import org.gradle.internal.classloader.ClasspathUtil;
 import org.gradle.internal.classpath.DefaultClassPath;
@@ -37,6 +38,7 @@ public class DefaultJdkToolsInitializer implements JdkToolsInitializer {
         File toolsJar = Jvm.current().getToolsJar();
         if (toolsJar != null) {
             final ClassLoader systemClassLoaderParent = classLoaderFactory.getIsolatedSystemClassLoader();
+            Logging.getLogger(getClass()).warn("Add " + toolsJar + " to " + systemClassLoaderParent);
             ClasspathUtil.addUrl((URLClassLoader) systemClassLoaderParent, DefaultClassPath.of(toolsJar).getAsURLs());
         }
     }
