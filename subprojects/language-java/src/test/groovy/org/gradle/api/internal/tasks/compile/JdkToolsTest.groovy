@@ -61,6 +61,7 @@ class JdkToolsTest extends Specification {
         // Diagnose flaky tests
         println(System.getProperty("java.class.path"))
         println(ClasspathUtil.getClasspathForClass(compiler.class))
+        println(compiler.class.classLoader)
 
         then:
         thrown IllegalStateException
